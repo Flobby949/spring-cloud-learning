@@ -16,6 +16,10 @@
     <description>优惠券父项目</description>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>coupon-template-serv</module>
+    </modules>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
