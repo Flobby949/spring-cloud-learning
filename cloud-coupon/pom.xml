@@ -20,6 +20,7 @@
         <module>coupon-template-serv</module>
         <module>coupon-calculation-serv</module>
         <module>coupon-customer-serv</module>
+        <module>coupon-middleware-serv</module>
     </modules>
 
     <properties>
