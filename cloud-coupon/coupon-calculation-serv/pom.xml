@@ -14,7 +14,6 @@
     <modules>
         <module>coupon-calculation-api</module>
         <module>coupon-calculation-impl</module>
-        <module>coupon-calculation-dao</module>
     </modules>
 
     <properties>
