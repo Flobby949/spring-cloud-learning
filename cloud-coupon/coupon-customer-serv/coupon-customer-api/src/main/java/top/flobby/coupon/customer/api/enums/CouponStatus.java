@@ -15,9 +15,9 @@ import java.util.stream.Stream;
 @Getter
 @AllArgsConstructor
 public enum CouponStatus {
-    AVAILABLE("可用", 0),
-    USED("已使用", 1),
-    INACTIVE("失效", 2);
+    AVAILABLE("可用", 1),
+    USED("已使用", 2),
+    INACTIVE("失效", 3);
 
     private final String status;
     private final Integer code;

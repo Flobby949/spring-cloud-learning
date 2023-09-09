@@ -47,7 +47,7 @@ public class CouponTemplateServiceImpl implements CouponTemplateService {
         CouponTemplate target = new CouponTemplate();
         BeanUtils.copyProperties(source, target);
 
-        target.setAvailable(true);
+        target.setAvailable(false);
         target.setId(null);
 
         templateDao.save(target);
