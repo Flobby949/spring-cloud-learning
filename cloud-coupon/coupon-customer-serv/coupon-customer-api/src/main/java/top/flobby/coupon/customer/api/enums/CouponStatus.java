@@ -15,17 +15,17 @@ import java.util.stream.Stream;
 @Getter
 @AllArgsConstructor
 public enum CouponStatus {
-    AVAILABLE("可用", "0"),
-    USED("已使用", "1"),
-    INVALID("失效", "2");
+    AVAILABLE("可用", 0),
+    USED("已使用", 1),
+    INACTIVE("失效", 2);
 
     private final String status;
-    private final String code;
+    private final Integer code;
 
-    public static CouponStatus convert(String code) {
+    public static CouponStatus convert(Integer code) {
         return Stream.of(values())
-                .filter(bean -> bean.code.equalsIgnoreCase(code))
+                .filter(bean -> bean.code.equals(code))
                 .findFirst()
-                .orElse(INVALID);
+                .orElse(INACTIVE);
     }
 }

@@ -12,14 +12,14 @@ import top.flobby.coupon.customer.api.enums.CouponStatus;
  **/
 
 @Converter
-public class CouponStatusConverter implements AttributeConverter<CouponStatus, String> {
+public class CouponStatusConverter implements AttributeConverter<CouponStatus, Integer> {
     @Override
-    public String convertToDatabaseColumn(CouponStatus couponStatus) {
+    public Integer convertToDatabaseColumn(CouponStatus couponStatus) {
         return couponStatus.getCode();
     }
 
     @Override
-    public CouponStatus convertToEntityAttribute(String code) {
+    public CouponStatus convertToEntityAttribute(Integer code) {
         return CouponStatus.convert(code);
     }
 }
