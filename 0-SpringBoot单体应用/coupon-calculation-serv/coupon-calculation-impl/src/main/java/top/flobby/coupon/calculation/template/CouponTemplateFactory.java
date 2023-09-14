@@ -39,6 +39,7 @@ public class CouponTemplateFactory {
             // 目前每个订单只支持单张优惠券
             CouponTemplateInfo template = order.getCouponInfos().get(0).getTemplate();
             CouponType category = CouponType.convert(template.getType());
+            log.info("当前使用优惠券类型：{}", category.getDescription());
             return switch (category) {
                 // 订单满减券
                 case MONEY_OFF -> moneyOffTemplate;
