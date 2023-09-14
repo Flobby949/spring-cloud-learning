@@ -56,15 +56,22 @@ spring:
         register-enabled: true
         # 服务宕机后，是否优先从本地读取服务配置
         naming-load-cache-at-start: false
+    openfeign:
+      client:
+        default-config:
+        # 单独配置不同服务的配置
+        config:
+          coupon-template-feign-client:
+            connect-timeout: 2000
+            read-timeout: 3000
+            logger-level: full
+          coupon-calculation-feign-client:
+            connect-timeout: 2000
+            read-timeout: 3000
+            logger-level: full
+
 
 logging:
   level:
     top.flobby.coupon: debug
     top.flobby.coupon.customer.feign: debug
-
-feign:
-  client:
-    config:
-      default:
-        connectTimeout: 1000
-        readTimeout: 200
