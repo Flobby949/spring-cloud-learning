@@ -7,9 +7,9 @@ spring:
     name: coupon-template-serv
   datasource:
     # mysql数据源
-    url: jdbc:mysql://127.0.0.1:3306/db_coupon?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://rm-cn-4xl3e1zjr00016fo.rwlb.rds.aliyuncs.com:3306/db_coupon?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
     username: root
-    password: kobe24
+    password: Jcx@@123
     # 指定数据源DataSource类型
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -28,9 +28,9 @@ spring:
       # 在生产环境全部为none，防止ddl结构被自动执行，破坏生产数据
       ddl-auto: none
     # 在日志中打印经过格式化的SQL语句
-    properties:
-      hibernate.format_sql: true
-      hibernate.show_sql: true
+#    properties:
+#      hibernate.format_sql: true
+#      hibernate.show_sql: true
     open-in-view: false
   cloud:
     nacos:

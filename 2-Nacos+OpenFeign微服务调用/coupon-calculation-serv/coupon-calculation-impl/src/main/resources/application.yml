@@ -29,9 +29,9 @@ spring:
         register-enabled: true
         # 服务宕机后，是否优先从本地读取服务配置
         naming-load-cache-at-start: false
-logging:
-  level:
-    top.flobby.coupon: debug
+#logging:
+#  level:
+#    top.flobby.coupon: debug
 
 # 开启所有management端点
 management:
