@@ -1,6 +1,6 @@
 # 项目的启动端口
 server:
-  port: 20000
+  port: 20005
 spring:
   application:
     # 定义项目名称

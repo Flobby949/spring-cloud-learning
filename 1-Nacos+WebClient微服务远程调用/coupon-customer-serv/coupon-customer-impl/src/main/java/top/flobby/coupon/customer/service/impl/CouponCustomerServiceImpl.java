@@ -25,6 +25,8 @@ import top.flobby.coupon.template.api.beans.CouponTemplateInfo;
 
 import java.util.*;
 
+import static top.flobby.coupon.customer.constant.Constant.TRAFFIC_VERSION;
+
 /**
  * @author : Flobby
  * @program : cloud-coupon
@@ -60,7 +62,17 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
 
     @Override
     public Coupon requestCoupon(RequestCoupon request) {
-        CouponTemplateInfo templateInfo = loadTemplateInfo(request.getCouponTemplateId());
+        // CouponTemplateInfo templateInfo = loadTemplateInfo(request.getCouponTemplateId());
+
+        // 自定义 webClient，添加打标请求头
+        CouponTemplateInfo templateInfo = webClientBuilder.build().get()
+                .uri("http://coupon-template-serv/template/getTemplate?id=" + request.getCouponTemplateId())
+                // 添加请求头
+                .header(TRAFFIC_VERSION, request.getTrafficVersion())
+                // 接收 response 响应
+                .retrieve()
+                .bodyToMono(CouponTemplateInfo.class)
+                .block();
 
         // 模板不存在则报错
         if (templateInfo == null) {

@@ -20,4 +20,8 @@ public class RequestCoupon {
     private Long userId;
     @NotNull
     private Long couponTemplateId;
+    /**
+     * Loadbalancer - 用作测试流量打标
+     */
+    private String trafficVersion;
 }
