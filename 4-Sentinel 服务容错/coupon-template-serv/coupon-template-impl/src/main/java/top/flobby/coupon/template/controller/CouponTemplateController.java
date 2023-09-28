@@ -81,9 +81,9 @@ public class CouponTemplateController {
         log.info("getTemplateInBatch 被调用！！！！！");
 
         // 当Template批量查询ID数量等于3时，验证熔断器
-        if (ids.size() == 3) {
-            throw new RuntimeException();
-        }
+        // if (ids.size() == 3) {
+        //     throw new RuntimeException();
+        // }
 
         // 增加响应时休眠
         return couponTemplateService.getTemplateInfoMap(ids);
@@ -103,10 +103,17 @@ public class CouponTemplateController {
         log.info(exception.getMessage());
         log.info("********************************");
         Map<Long, CouponTemplateInfo> map = new HashMap<>();
-        map.put(1L, CouponTemplateInfo.builder()
-                .name("限流")
-                .desc("限流")
-                .build());
+        if (exception.getMessage() == null) {
+            map.put(1L, CouponTemplateInfo.builder()
+                    .name("熔断")
+                    .desc("熔断")
+                    .build());
+        } else {
+            map.put(1L, CouponTemplateInfo.builder()
+                    .name("限流")
+                    .desc("限流")
+                    .build());
+        }
         return map;
     }
 
