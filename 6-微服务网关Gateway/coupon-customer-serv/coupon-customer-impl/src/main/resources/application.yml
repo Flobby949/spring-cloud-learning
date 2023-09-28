@@ -1,0 +1,81 @@
+server:
+  port: 20001
+  # 在返回给页面的结果里，把错误信息添加到message里
+  error:
+    include-message: always
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: coupon-customer-serv
+  datasource:
+    # mysql数据源
+    url: jdbc:mysql://rm-cn-4xl3e1zjr00016fo.rwlb.rds.aliyuncs.com:3306/db_coupon?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+    username: root
+    password: Jcx@@123
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 连接池
+    hikari:
+      pool-name: CloudCouponHikari
+      connection-timeout: 5000
+      idle-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      max-lifetime: 60000
+      auto-commit: true
+  jpa:
+    show-sql: true
+    hibernate:
+      # 在生产环境全部为none，防止ddl结构被自动执行
+      ddl-auto: none
+#    properties:
+#      hibernate.show_sql: true
+#      hibernate.format_sql: true
+    open-in-view: false
+  cloud:
+    nacos:
+      discovery:
+        # nacos服务地址，可以配置多个，逗号分割
+        server-addr: localhost:8848
+#        server-addr: mse-7b8090e0-p.nacos-ans.mse.aliyuncs.com:8848
+        # 注册到nacos的服务名，不写默认使用 spring.application.name 配置
+        service: coupon-customer-serv
+        # 各个微服务向nacos发送心跳的间隔，单位 毫秒
+        heart-beat-interval: 5000
+        # 超时时间，大于发送间隔
+        heart-beat-timeout: 15000
+        # 元数据，可选
+        metadata:
+          myData: abc
+        # nacos创建的命名空间的 ID
+        namespace: dev
+        # 本地配置即可，同一个命名空间且同一分组下的服务才能相互调用
+        group: myGroup
+        # 可选默认true，如果不提供服务，可以选false
+        register-enabled: true
+        # 服务宕机后，是否优先从本地读取服务配置
+        naming-load-cache-at-start: false
+#    openfeign:
+#      circuitbreaker:
+#        enabled: true
+#      client:
+#        default-config:
+#        # 单独配置不同服务的配置
+#        config:
+#          coupon-template-feign-client:
+#            # 网络连接 阶段 2秒超时
+#            connect-timeout: 2000
+#            # 服务请求响应阶段 3秒超时
+#            read-timeout: 3000
+#            logger-level: full
+#          coupon-calculation-feign-client:
+#            connect-timeout: 2000
+#            read-timeout: 3000
+#            logger-level: full
+
+#logging:
+#  level:
+#    top.flobby.coupon: debug
+#    top.flobby.coupon.customer.feign: debug

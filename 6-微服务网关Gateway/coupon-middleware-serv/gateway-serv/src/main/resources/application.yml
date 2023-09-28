@@ -1,0 +1,39 @@
+server:
+  port: 30000
+
+spring:
+  application:
+    name: coupon-gateway-serv
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+        heart-beat-interval: 5000
+        heart-beat-timeout: 15000
+        group: myGroup
+    gateway:
+      discovery:
+        locator:
+          # 运行网关通过 服务发现组件 (nacos) 找到其他微服务
+          enabled: true
+      routes:
+        - id: customer-route
+          uri: lb://coupon-customer-serv
+          predicates:
+            - Path=/gateway/coupon-customer/**
+#            - Between=2023-09-28T09:20:00.000+08:00,2023-09-28T09:20:30.000+08:00
+          filters:
+            - StripPrefix=1
+        - id: calculation-route
+          uri: lb://coupon-calculation-serv
+          predicates:
+            - Path=/gateway/calculator/**
+          filters:
+            - StripPrefix=1
+        - id: template-route
+          uri: lb://coupon-template-serv
+          predicates:
+            - Path=/gateway/template/**
+          filters:
+            - StripPrefix=1
