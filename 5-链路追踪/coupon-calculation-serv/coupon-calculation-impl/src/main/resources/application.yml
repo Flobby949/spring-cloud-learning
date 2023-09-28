@@ -1,0 +1,51 @@
+server:
+  port: 20002
+  # 在返回给页面的结果里，把错误信息添加到message里
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: coupon-calculation-serv
+  cloud:
+    nacos:
+      discovery:
+        # nacos服务地址，可以配置多个，逗号分割
+        server-addr: localhost:8848
+        # 注册到nacos的服务名
+        service: coupon-calculation-serv
+        # 各个微服务向nacos发送心跳的间隔，单位 毫秒
+        heart-beat-interval: 5000
+        # 超时时间，大于发送间隔
+        heart-beat-timeout: 20000
+        # 元数据，可选
+        metadata:
+          myData: abc
+        # nacos创建的命名空间的 ID
+        namespace: dev
+        # 本地配置即可，同一个命名空间且同一分组下的服务才能相互调用
+        group: myGroup
+        # 可选默认true，如果不提供服务，可以选false
+        register-enabled: true
+        # 服务宕机后，是否优先从本地读取服务配置
+        naming-load-cache-at-start: false
+    sleuth:
+      sampler:
+        # 采样率，0-1的浮点数，如果小于 1，表示 有的请求不会被采样
+        probability: 1
+        # 每秒有多少个请求进行采样
+        rate: 1000
+    zipkin:
+      sender:
+        type: web
+        base-url: http://localhost:9411/
+#logging:
+#  level:
+#    top.flobby.coupon: debug
+
+# 开启所有management端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
